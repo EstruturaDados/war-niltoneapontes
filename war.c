@@ -15,12 +15,19 @@
 // ============================================================================
 
 // Inclusão das bibliotecas padrão necessárias para entrada/saída, alocação de memória, manipulação de strings e tempo.
+#include <stdio.h>
+#include <string.h>
 
 // --- Constantes Globais ---
 // Definem valores fixos para o número de territórios, missões e tamanho máximo de strings, facilitando a manutenção.
+int NUMERO_TERRITORIOS = 1;
 
 // --- Estrutura de Dados ---
 // Define a estrutura para um território, contendo seu nome, a cor do exército que o domina e o número de tropas.
+struct Territorio {
+    char nome[30], cor[10];
+    int tropas;
+};
 
 // --- Protótipos das Funções ---
 // Declarações antecipadas de todas as funções que serão usadas no programa, organizadas por categoria.
@@ -32,6 +39,24 @@
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
 int main() {
+    struct Territorio territorios[5];
+    for(int i = 0; i < NUMERO_TERRITORIOS; i++) {
+        printf("Insira o nome do territorio %d: ", i+1);
+        scanf("%49s", territorios[i].nome);
+        printf("Insira a cor do territorio %d: ", i+1);
+        scanf("%49s", territorios[i].cor);
+        printf("Insira o nome do territorio %d: ", i+1);
+        scanf("%d", &territorios[i].tropas);
+        printf("-------------------------\n");
+    }
+
+    for(int i = 0; i < NUMERO_TERRITORIOS; i++) {
+        printf("\n\n----------- TERRITORIO %d --------------\n", i+1);
+        printf("Nome: %s\n", territorios[i].nome);
+        printf("Cor: %s\n", territorios[i].cor);
+        printf("Tropas: %d\n", territorios[i].tropas);
+    }
+
     // 1. Configuração Inicial (Setup):
     // - Define o locale para português.
     // - Inicializa a semente para geração de números aleatórios com base no tempo atual.
