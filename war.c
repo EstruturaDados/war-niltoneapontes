@@ -20,7 +20,7 @@
 
 // --- Constantes Globais ---
 // Definem valores fixos para o número de territórios, missões e tamanho máximo de strings, facilitando a manutenção.
-int NUMERO_TERRITORIOS = 1;
+int NUMERO_TERRITORIOS = 2;
 
 // --- Estrutura de Dados ---
 // Define a estrutura para um território, contendo seu nome, a cor do exército que o domina e o número de tropas.
@@ -42,11 +42,16 @@ int main() {
     struct Territorio territorios[5];
     for(int i = 0; i < NUMERO_TERRITORIOS; i++) {
         printf("Insira o nome do territorio %d: ", i+1);
-        scanf("%49s", territorios[i].nome);
+        fgets(territorios[i].nome, sizeof territorios[i].nome, stdin);
+        territorios[i].nome[strcspn(territorios[i].nome, "\n")] = '\0'; // Retirando o "enter" no final da string
+
         printf("Insira a cor do territorio %d: ", i+1);
-        scanf("%49s", territorios[i].cor);
+        fgets(territorios[i].cor, sizeof territorios[i].cor, stdin);
+        territorios[i].cor[strcspn(territorios[i].cor, "\n")] = '\0'; // Retirando o "enter" no final da string
+
         printf("Insira o nome do territorio %d: ", i+1);
         scanf("%d", &territorios[i].tropas);
+        getchar();
         printf("-------------------------\n");
     }
 
