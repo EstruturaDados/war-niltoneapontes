@@ -49,7 +49,7 @@ int main() {
         fgets(territorios[i].cor, sizeof territorios[i].cor, stdin);
         territorios[i].cor[strcspn(territorios[i].cor, "\n")] = '\0'; // Retirando o "enter" no final da string
 
-        printf("Insira o nome do territorio %d: ", i+1);
+        printf("Insira as tropas do territorio %d: ", i+1);
         scanf("%d", &territorios[i].tropas);
         getchar();
         printf("-------------------------\n");
