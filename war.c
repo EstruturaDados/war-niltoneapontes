@@ -42,6 +42,7 @@ void inicializarTerritorios(struct Territorio* territorios);
 void liberarMemoria(struct Territorio* territorios);
 void exibirMenuPrincipal(struct Territorio* territorios);
 void exibirMapa(const struct Territorio* territorios);
+void faseDeAtaque(struct Territorio* territorios);
 
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
@@ -119,9 +120,9 @@ void exibirMenuPrincipal(struct Territorio* territorios) {
         printf("0. Sair \n");
         scanf("%d", &option);
 
-        if(option = 1) {
+        if(option == 1) {
             faseDeAtaque(territorios);
-        } else if(option = 2) {
+        } else if(option == 2) {
             exibirMapa(territorios);
         }
     } while (option != 0);
@@ -147,19 +148,24 @@ void exibirMenuPrincipal(struct Territorio* territorios) {
 void faseDeAtaque(struct Territorio* territorios) {
     int origem, destino;
     exibirMapa(territorios);
-    printf("\n Digite o número do território de origem do ataque:");
+    printf("\nDigite o número do território de origem do ataque:");
     scanf("%d", &origem);
-    printf("\n Digite o número do território de destino do ataque:");
+    printf("\nDigite o número do território de destino do ataque:");
     scanf("%d", &destino);
     int dadoOrigem = (rand() % 6) + 1;
     int dadoDestino = (rand() % 6) + 1; 
-    printf("%s está atacando %s", territorios[origem - 1].nome, territorios[destino - 1].nome);
+    printf("\n\n%s está atacando %s...\n\n", territorios[origem - 1].nome, territorios[destino - 1].nome);
     if(dadoOrigem > dadoDestino) {
-        printf("Ataque bem sucedido!");
+        printf("Ataque bem sucedido!\n\n");
         territorios[destino - 1].tropas -= 1;
+        if(territorios[destino - 1].tropas == 0) {
+            printf("*** %s foi derrotada ***\n\n", territorios[destino - 1].nome);
+        }
     } else {
-        printf("Ataque falhou... Recuando.");
+        printf("Ataque falhou... Recuando.\n\n");
     }
+    printf("Pressione qualquer tecla para continuar...\n\n");
+    scanf();
 }
 
 // simularAtaque():
