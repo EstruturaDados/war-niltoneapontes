@@ -43,6 +43,7 @@ void liberarMemoria(struct Territorio* territorios);
 void exibirMenuPrincipal(struct Territorio* territorios);
 void exibirMapa(const struct Territorio* territorios);
 void faseDeAtaque(struct Territorio* territorios);
+void limparBufferEntrada();
 
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
@@ -136,6 +137,7 @@ void exibirMenuPrincipal(struct Territorio* territorios) {
         printf("Nome: %s\n", territorios[i].nome);
         printf("Cor: %s\n", territorios[i].cor);
         printf("Tropas: %d\n", territorios[i].tropas);
+        printf("\n----------------------------------------\n");
     }
  }
 
@@ -165,7 +167,8 @@ void faseDeAtaque(struct Territorio* territorios) {
         printf("Ataque falhou... Recuando.\n\n");
     }
     printf("Pressione qualquer tecla para continuar...\n\n");
-    scanf();
+    limparBufferEntrada();
+    getchar();
 }
 
 // simularAtaque():
@@ -181,5 +184,8 @@ void faseDeAtaque(struct Territorio* territorios) {
 // Implementa a lógica para cada tipo de missão (destruir um exército ou conquistar um número de territórios).
 // Retorna 1 (verdadeiro) se a missão foi cumprida, e 0 (falso) caso contrário.
 
-// limparBufferEntrada():
 // Função utilitária para limpar o buffer de entrada do teclado (stdin), evitando problemas com leituras consecutivas de scanf e getchar.
+void limparBufferEntrada() {
+    int temp;
+    while ((temp = getchar()) != '\n' && temp != EOF); // limpa o buffer
+}
